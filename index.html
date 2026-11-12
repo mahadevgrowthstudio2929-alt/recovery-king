@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="Cricket match analysis, match notes and structured insights.">
+
+<title>Cricket Analysis</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --bg: #080d18;
+    --gold: #e7c77a;
+    --gold-soft: #fff0c5;
+    --muted: #aab5c8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100svh;
+    padding: 22px 15px;
+    display: grid;
+    place-items: center;
+    color: #f8f7f2;
+
+    background:
+    radial-gradient(ellipse at 50% 8%, rgba(49,82,139,.28), transparent 42%),
+    radial-gradient(ellipse at 100% 100%, rgba(169,125,44,.13), transparent 40%),
+    var(--bg);
+
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+.page {
+    width: 100%;
+    max-width: 390px;
+}
+
+.card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 27px 22px 21px;
+
+    border: 1px solid rgba(231,199,122,.22);
+    border-radius: 25px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        155deg,
+        rgba(24,38,62,.97),
+        rgba(10,17,30,.98) 68%
+    );
+
+    box-shadow:
+    0 22px 70px rgba(0,0,0,.48),
+    0 0 32px rgba(231,199,122,.08),
+    inset 0 1px rgba(255,255,255,.07);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    width: 240px;
+    height: 240px;
+
+    top: -155px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+    background: rgba(231,199,122,.18);
+    filter: blur(35px);
+}
+
+.topline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+}
+
+.topline::before,
+.topline::after {
+    content: "";
+    width: 23px;
+    height: 1px;
+    background: var(--gold);
+    opacity: .65;
+}
+
+.logo-wrap {
+    width: 108px;
+    height: 108px;
+
+    margin: 21px auto 17px;
+
+    display: grid;
+    place-items: center;
+
+    position: relative;
+    border-radius: 50%;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        rgba(255,255,255,.015)
+    );
+
+    border: 1px solid rgba(231,199,122,.58);
+
+    box-shadow:
+    0 0 0 6px rgba(231,199,122,.035),
+    0 0 28px rgba(231,199,122,.17);
+}
+
+.logo-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(231,199,122,.13);
+}
+
+.logo-wrap img {
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    border-radius: 50%;
+
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
+}
+
+h1 {
+    margin: 0;
+
+    color: var(--gold-soft);
+
+    font: 700 clamp(23px, 7vw, 29px)/1.18 "Cinzel", serif;
+
+    letter-spacing: 1.1px;
+
+    text-shadow: 0 0 22px rgba(231,199,122,.17);
+}
+
+.subtitle {
+    margin: 9px 0 0;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 58px;
+    height: 2px;
+
+    margin: 20px auto;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+}
+
+.intro {
+    margin: 0 auto 19px;
+    max-width: 290px;
+
+    color: #d5dbea;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    margin: 0 0 21px;
+}
+
+.highlight {
+    min-height: 67px;
+    padding: 12px 5px 10px;
+
+    border: 1px solid rgba(255,255,255,.085);
+    border-radius: 13px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.065),
+        rgba(255,255,255,.018)
+    );
+}
+
+.highlight .icon {
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--gold);
+    font-size: 15px;
+}
+
+.highlight span:last-child {
+    display: block;
+
+    color: #e6eaf2;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .65px;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+.join-btn {
+    width: 100%;
+    min-height: 52px;
+
+    border: 1px solid rgba(255,239,193,.8);
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    color: #17130a;
+
+    background: linear-gradient(
+        105deg,
+        #c99c45,
+        #ffedb7 48%,
+        #d6ad5b
+    );
+
+    box-shadow:
+    0 8px 25px rgba(201,156,69,.2),
+    inset 0 1px rgba(255,255,255,.65);
+
+    font: 800 12px "DM Sans", sans-serif;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.join-btn:active {
+    transform: scale(.985);
+}
+
+.join-btn:hover {
+    box-shadow: 0 10px 32px rgba(201,156,69,.32);
+    transform: translateY(-1px);
+}
+
+.join-btn .arrow {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.note {
+    margin: 14px 4px 0;
+
+    color: #8592a8;
+
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+.footer {
+    margin-top: 17px;
+
+    color: #68758b;
+
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 360px) {
+
+    .card {
+        padding: 23px 17px 19px;
+    }
+
+    .logo-wrap {
+        width: 96px;
+        height: 96px;
+    }
+
+    .logo-wrap img {
+        width: 73px;
+        height: 73px;
+    }
+
+    .highlight span:last-child {
+        font-size: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+<section class="card">
+
+    <div class="topline">
+        THE MATCH ROOM
+    </div>
+
+    <!-- CHANNEL LOGO -->
+    <div class="logo-wrap">
+        <img src="logo.png" alt="Channel Logo">
+    </div>
+
+    <!-- CHANNEL NAME -->
+    <h1>CHANNEL NAME</h1>
+
+    <p class="subtitle">
+        Cricket • Analysis • Match Insights
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="intro">
+        A focused space for cricket discussions,
+        match breakdowns and structured analysis.
+    </p>
+
+    <!-- HIGHLIGHTS -->
+    <div class="highlights">
+
+        <div class="highlight">
+            <span class="icon">◈</span>
+            <span>Match<br>Breakdown</span>
+        </div>
+
+        <div class="highlight">
+            <span class="icon">◎</span>
+            <span>Game<br>Insights</span>
+        </div>
+
+        <div class="highlight">
+            <span class="icon">✧</span>
+            <span>Regular<br>Updates</span>
+        </div>
+
+    </div>
+
+    <!-- JOIN BUTTON -->
+    <button class="join-btn" type="button" id="joinButton">
+
+        <span>Explore Channel</span>
+        <span class="arrow">↗</span>
+
+    </button>
+
+    <p class="note">
+        Content is for informational and educational purposes only.
+        No outcomes or returns are promised.
+    </p>
+
+    <div class="footer">
+        Independent Cricket Analysis
+    </div>
+
+</section>
+
+</main>
+
+<script>
+
+// PASTE TELEGRAM INVITE LINK HERE
+const TELEGRAM_LINK = "";
+
+document.getElementById("joinButton").addEventListener("click", function() {
+
+    if (!TELEGRAM_LINK) {
+        alert("Please add the Telegram invite link in the index.html file.");
+        return;
+    }
+
+    window.open(
+        TELEGRAM_LINK,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+});
+
+</script>
+
+</body>
+</html>
